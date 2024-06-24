@@ -5,7 +5,7 @@
 #   - demanderReponse
 #
 # Question : titre: str, choix (str), bonne reponse: str
-# Autre donnes : reponse_user, score_user
+# Autres données : reponse_user, score_user
 #
 # classe Questionnaire
 # - questions    (Question)
