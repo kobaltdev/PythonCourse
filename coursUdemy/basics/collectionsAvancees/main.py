@@ -3,7 +3,7 @@ def nb_puissance(a):
     return p
 
 
-for i in range(0, 33):
+for i in range(0, 32):
     j = nb_puissance(i)
     print(j)
 
