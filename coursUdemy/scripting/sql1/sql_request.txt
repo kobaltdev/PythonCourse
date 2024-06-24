@@ -1,0 +1,16 @@
+CREATE TABLE artiste (
+    artiste_id INTEGER NOT NULL PRIMARY KEY,
+    nom VARCHAR);
+
+CREATE TABLE album (
+    album_id INTEGER NOT NULL PRIMARY KEY,
+    artiste_id INTEGER REFERENCES artiste,
+    titre VARCHAR,
+    annee_sortie INTEGER);
+
+INSERT INTO artiste (nom) VALUES ("Michael Jackson");
+INSERT INTO album (artiste_id, titre, annee_sortie) VALUES (1, "Thriller", 1983);
+
+INSERT INTO artiste (nom) VALUES ("Celine Dion");
+INSERT INTO album (artiste_id, titre, annee_sortie) VALUES (2, "Falling into You", 1996);
+INSERT INTO album (artiste_id, titre, annee_sortie) VALUES (2, "Let's Talk About Love", 1997);
