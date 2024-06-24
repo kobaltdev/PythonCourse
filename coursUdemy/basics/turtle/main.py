@@ -32,3 +32,5 @@ def carres(taille_depart, pas, nb):
 carres(20, 20, 10)
 
 turtle.done()
+fze
+
