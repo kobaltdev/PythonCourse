@@ -28,12 +28,15 @@ def bornage():
                 print("Merci de répondre 'o' ou 'n'")
     print()
     print(f"Ok, votre nombre est inférieur à {borne_max} !")
+    print()
     return borne_max
 
 
 def trouver_nombre(borne_max):
-    borne_min = 0
+    bmin = 0
+    bmax = 10
+    
 
 
-# intro()
+intro()
 bmax = bornage()
