@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "name": "R2-D2",
+        "status": "active"
+    },
+    {
+        "id": 2,
+        "name": "C-3PO",
+        "status": "active"
+    },
+    {
+        "id": 3,
+        "name": "BB-8",
+        "status": "inactive"
+    }
+]
