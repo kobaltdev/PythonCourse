@@ -19,8 +19,9 @@ import os
 
 # Get current working dir
 cwd = os.getcwd()
+directory = os.path.dirname(__file__)
 # contruction du chemin de fichier complet
-file_to_compute = os.path.join(cwd, "base_resources.json")
+file_to_compute = os.path.join(directory, "base_resources.json")
 print(file_to_compute)
 
 
