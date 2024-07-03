@@ -9,11 +9,10 @@ Fichier associé : scores.json
 import json
 import os
 
-# Get current working dir
-cwd = os.getcwd()
-
+# Path du dossier de travail
+directory = os.path.dirname(__file__)
 # contruction du chemin de fichier complet
-file_to_compute = os.path.join(cwd, "scores.json")
+file_to_compute = os.path.join(directory, "scores.json")
 print(file_to_compute)
 
 
