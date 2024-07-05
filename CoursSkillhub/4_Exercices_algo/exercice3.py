@@ -27,19 +27,22 @@ expected_resources ={'eau': MIN_WATER,
                      'energie': MIN_ENERGY}
 
 
-# Path du dossier de travail
-directory = os.path.dirname(__file__)
-# contruction du chemin de fichier complet
-file_to_compute = os.path.join(directory, "base_resources.json")
-# print(file_to_compute)
+
+def set_file_path(filename):
+    # Path du dossier de travail
+    directory = os.path.dirname(__file__)
+    # contruction du chemin de fichier complet
+    file_to_compute = os.path.join(directory, filename)
+    return file_to_compute
+
+def write_file_to_json(filename):
+    pass 
 
 
-def show_resources_from_json(json_resources):
+def get_resources_from_json(json_file):
     # ouverture du fichier et import json
-    with open(json_resources, 'r') as fichier:
+    with open(json_file, 'r') as fichier:
         extracted_dict_from_json = json.load(fichier)
-    # affichage du resultat
-    print(extracted_dict_from_json)
     # creation d'un nouveau dico pour les donnees ressources nested
     resources_dict = extracted_dict_from_json['ressources']
     return resources_dict
@@ -52,8 +55,9 @@ def input_new_value(ref_value):
             answer = int(input("Saisir une nouvelle valeur pour la ressource : "))
             if answer > ref_value:
                 print()
-                print("Valeur mise à jour")
+                print("-> Valeur mise à jour")
                 print("------------------")
+                time.sleep(1)
                 return answer
             else:
                 print("Merci de saisir une valeur supérieure au stock actuel")
@@ -62,37 +66,56 @@ def input_new_value(ref_value):
 
 
 def show_and_fix_resources(resources_cur, exp_resources):
+    enough_resources = True
+    print("* * * * * * * * * * * ")
     print("GESTION DES RESSOURCES")
     print("* * * * * * * * * * * ")
-    # print("Niveau de ressources attendu :")
-    # # boucle de lecture du contenu :
-    # for k in expected_resources.keys():
-    #     print(k, expected_resources[k])
-    # print("-----------------------------")
-    # print("Niveau de ressources actuel :")
     print()
+    print("Verification des ressources en cours ...")
+    print()
+    time.sleep(2)
     # boucle de lecture du contenu : 
     for k in resources_cur.keys():
-        print(k)
-
+        print(f"- {k.upper()}")
+        print(f"Attendu : {exp_resources[k]}")
         if resources_cur[k] < expected_resources[k]:
-            print(k, resources_cur[k], "- INSUFFISANT")
+            enough_resources = False
+            print("En stock : ", resources_cur[k], "- INSUFFISANT")
             print()
             print("Correction requise !!")
             print()
             time.sleep(1)
             new_value = input_new_value(resources_cur[k])
+            # update dictionnaire avec la nouvelle valeur retournee
             resources_cur.update({k:new_value})
         else:
-            print(k, resources_cur[k], "- OK")
+            print("En stock : ", resources_cur[k], "- OK")
             time.sleep(1)
             print()
     print("Nouvelles valeurs pour les ressources :")
     for k in resources_cur.keys():
-        print(k, resources_cur[k])
+        print(k.upper(), "=", resources_cur[k])
+    print("---------------------------------------")
+    print()
+    if not enough_resources:
+        show_and_fix_resources(resources_cur, exp_resources)
+
+
+def update_newressources_to_json(dict_name):
+    # construction du nouveau dictionnaire avec la meme structure que le json
+    dict_updated = {"ressources": {}}
+    dict_updated["ressources"] = dict_name
+    # generation du json à partir du dictionnaire
+    json_to_update = json.dumps(dict_updated)
+    print(json_to_update)
+    # generation du path pour le fichier json
+    file_to_update = set_file_path(json_to_update)
+    print(file_to_update)
 
 
 
+# file_to_compute = set_file_to_compute("base_resources.json")
+# resources_current = get_resources_from_json(file_to_compute)
+# show_and_fix_resources(resources_current, expected_resources)
 
-resources_current = show_resources_from_json(file_to_compute)
-show_and_fix_resources(resources_current, expected_resources)
+update_newressources_to_json(expected_resources)
