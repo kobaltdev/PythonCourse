@@ -57,6 +57,7 @@ def input_new_value(ref_value):
                 print()
                 print("-> Valeur mise à jour")
                 print("------------------")
+                print()
                 time.sleep(1)
                 return answer
             else:
@@ -101,21 +102,42 @@ def show_and_fix_resources(resources_cur, exp_resources):
         show_and_fix_resources(resources_cur, exp_resources)
 
 
-def update_newressources_to_json(dict_name):
+def update_newressources_to_json(dict_name, filename_to_upload):
     # construction du nouveau dictionnaire avec la meme structure que le json
     dict_updated = {"ressources": {}}
     dict_updated["ressources"] = dict_name
     # generation du json à partir du dictionnaire
-    json_to_update = json.dumps(dict_updated)
-    print(json_to_update)
+    json_file = json.dumps(dict_updated)
     # generation du path pour le fichier json
-    file_to_update = set_file_path(json_to_update)
-    print(file_to_update)
+    json_absolute_path = set_file_path(filename_to_upload)
+
+    print("- Mise a jour du nouveau fichier de ressources -")
+    print()
+    
+    # verifier si le fichier existe deja et le supprimer le cas échéant
+    if os.path.exists(json_absolute_path):
+        print(f"Le fichier {filename_to_upload} existe déjà, suppression en cours")
+        time.sleep(1)
+        os.remove(json_absolute_path)
+        print("Fichier supprimé !")
+
+    # upload du nouveau fichier de ressources
+    with open(json_absolute_path, 'w') as file:
+        print()
+        print("Ecriture du nouveau fichier de ressources...")
+        print(f"Chemin du fichier : {json_absolute_path}")
+        time.sleep(1)
+        file.write(json_file)
+        print("OK !")
+        print()
+        
 
 
+##########################
+#          MAIN          #
+##########################
 
-# file_to_compute = set_file_to_compute("base_resources.json")
-# resources_current = get_resources_from_json(file_to_compute)
-# show_and_fix_resources(resources_current, expected_resources)
-
-update_newressources_to_json(expected_resources)
+file_to_compute = set_file_path("base_resources.json")
+resources_current = get_resources_from_json(file_to_compute)
+show_and_fix_resources(resources_current, expected_resources)
+update_newressources_to_json(expected_resources, "updated_resources.json")
