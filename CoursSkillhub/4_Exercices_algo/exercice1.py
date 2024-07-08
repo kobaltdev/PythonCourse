@@ -12,19 +12,28 @@ import json
 import base64
 import os
 
-# Get current working dir
-cwd = os.getcwd()
+
+def set_file_path(filename):
+    # Path du dossier de travail
+    directory = os.path.dirname(__file__)
+    # contruction du chemin de fichier complet
+    file_to_compute = os.path.join(directory, filename)
+    return file_to_compute
+
+
+##########################
+#          MAIN          #
+##########################
 
 # contruction du chemin de fichier complet
-file_to_decode = os.path.join(cwd, "alien_message.json")
-print()
-print(f"chemin du fichier à decoder : {file_to_decode}")
+file_to_decode = set_file_path("alien_message.json")
+
 
 # ouverture du fichier
 with open(file_to_decode, 'r') as fichier:
     # import du fichier dans un dictionnaire
     base64_message_dict = json.load(fichier)
-    # Decocade avec base64
+    # Decode avec base64
     message_decode = base64.b64decode(base64_message_dict["message"])
     # Conversion en ascii
     message_decode_str = message_decode.decode("ascii")

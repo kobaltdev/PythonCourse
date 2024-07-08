@@ -35,9 +35,6 @@ def set_file_path(filename):
     file_to_compute = os.path.join(directory, filename)
     return file_to_compute
 
-def write_file_to_json(filename):
-    pass 
-
 
 def get_resources_from_json(json_file):
     # ouverture du fichier et import json

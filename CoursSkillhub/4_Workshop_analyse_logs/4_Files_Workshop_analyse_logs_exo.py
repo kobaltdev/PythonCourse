@@ -1,7 +1,7 @@
 """ 
 WORKSHOP analyse de fichier de log
 
-Ta misssion : extraire le données d'un fichier de log
+Ta mission : extraire le données d'un fichier de log
 
 Tu devras :
 
