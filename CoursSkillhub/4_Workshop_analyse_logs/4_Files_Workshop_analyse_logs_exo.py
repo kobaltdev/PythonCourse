@@ -13,28 +13,73 @@ Tu devras :
         - Compter les occurrences de chaque user agent 
 """
 
-# Charger le fichier de logs
+####################
+# Imports
+####################
+import os
+
+####################
+# FONCTIONS 
+####################
 
 
-# Fonction pour analyser les logs (avec étapes)
-def analyze_logs(logs):
+def set_file_path(filename):
+    # Path du dossier de travail
+    directory = os.path.dirname(__file__)
+    # contruction du chemin de fichier complet
+    file_to_compute = os.path.join(directory, filename)
+    return file_to_compute
+
+
+def count_lines(file):
+    line_count = 0
+    with open(file, 'r') as fichier:
+        raw_content = fichier.read()
+        count = raw_content.split("\n")
+        for i in count:
+            if i:
+                line_count += 1
+    print("Nombre de lignes à analyser :", line_count)
+    return line_count
+
+
+def analyze_logs(log_file_to_analyse):
+    # initialisation des variables de comptage
     error_count = 0
     access_403 = 0
     access_404 = 0
     user_agents = {}
     ip_count = {}
 
-        # Compter les occurrences de chaque adresse IP
+    # Affichage du nombre de lignes à traiter
+    line_count = count_lines(log_file_to_analyse)
 
+    # Ouverture du fichier et analyse des logs
+    with open(log_file_to_analyse, 'r') as fichier:
+        content = fichier.readlines()
+        for i in range(0, line_count):
+            lne = content[i].split(" ")
+            print(lne[9])
 
-        # Compter les codes de statut HTTP
+    # print(log_file)
 
+    # for i in range(0, 20):
+    #     l = contenu[i].split(" ")
+    # print(l)
 
-        # Compter les occurrences de chaque user agent
+####################
+# MAIN
+####################
+
+# Construction du path
+logfile = set_file_path('logz.log')
+
+# analyse des logs
+analyze_logs(logfile)
 
 
 # Analyser les logs
-error_count, access_403, access_404, user_agents, ip_count = analyze_logs(logs)
+# error_count, access_403, access_404, user_agents, ip_count = analyze_logs(logs)
 
 # Affichage des résultats
 
