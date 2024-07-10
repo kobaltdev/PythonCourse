@@ -17,6 +17,7 @@ Tu devras :
 # Imports
 ####################
 import os
+from collections import Counter
 
 ####################
 # FONCTIONS 
@@ -48,24 +49,34 @@ def analyze_logs(log_file_to_analyse):
     error_count = 0
     access_403 = 0
     access_404 = 0
+    http_codes_list = []
+    http_codes = {}
     user_agents = {}
+    ip_list = []
     ip_count = {}
+   
 
     # Affichage du nombre de lignes à traiter
     line_count = count_lines(log_file_to_analyse)
 
-    # Ouverture du fichier et analyse des logs
+    # Ouverture du fichier et dump des logs
     with open(log_file_to_analyse, 'r') as fichier:
         content = fichier.readlines()
+
+        # boucle principale
         for i in range(0, line_count):
-            lne = content[i].split(" ")
-            print(lne[9])
+            log_lines = content[i].split(" ")
 
-    # print(log_file)
+            # comptage des IPs 
+            ip_list.append(log_lines[0]) # append à une liste de toutes les IP
+            ip_count = Counter(ip_list) # on utilise Counter pour créer le dictionnaire d'occurences
+        
+            # comptage des codes HTTP
+            http_codes_list.append(log_lines[8])
+            http_codes = Counter(http_codes_list)
+        
 
-    # for i in range(0, 20):
-    #     l = contenu[i].split(" ")
-    # print(l)
+
 
 ####################
 # MAIN
