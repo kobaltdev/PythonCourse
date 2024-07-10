@@ -72,8 +72,8 @@ def analyze_logs(log_file_to_analyse):
             ip_count = Counter(ip_list) # on utilise Counter pour créer le dictionnaire d'occurences
         
             # comptage des codes HTTP
-            http_codes_list.append(log_lines[8])
-            http_codes = Counter(http_codes_list)
+            http_codes_list.append(log_lines[8]) # append à une liste de tous les codes HTTP
+            http_codes = Counter(http_codes_list) # on utilise Counter pour créer le dictionnaire d'occurences
         
 
 
