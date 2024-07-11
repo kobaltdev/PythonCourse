@@ -13,20 +13,25 @@ et en décidant des actions à entreprendre.
 
 Fichier associé : base_resources.json
 """
+##########################
+#         IMPORTS        #
+##########################
 
 import json
 import os
 import time
 
-# Constantes
+##########################
+#      CONSTANTES        #
+##########################
+
 MIN_WATER = 100
 MIN_FOOD = 200
 MIN_ENERGY = 150
-expected_resources ={'eau': MIN_WATER, 
-                     'nourriture': MIN_FOOD, 
-                     'energie': MIN_ENERGY}
 
-
+##########################
+#      FONCTIONS         #
+##########################
 
 def set_file_path(filename):
     # Path du dossier de travail
@@ -97,6 +102,8 @@ def show_and_fix_resources(resources_cur, exp_resources):
     print()
     if not enough_resources:
         show_and_fix_resources(resources_cur, exp_resources)
+    
+    return resources_cur
 
 
 def update_newressources_to_json(dict_name, filename_to_upload):
@@ -129,12 +136,24 @@ def update_newressources_to_json(dict_name, filename_to_upload):
         print()
         
 
-
 ##########################
 #          MAIN          #
 ##########################
 
+
+expected_resources ={'eau': MIN_WATER, 
+                     'nourriture': MIN_FOOD, 
+                     'energie': MIN_ENERGY}
+
+
+# Construction du path
 file_to_compute = set_file_path("base_resources.json")
+
+# import depuis JSON, to dico
 resources_current = get_resources_from_json(file_to_compute)
-show_and_fix_resources(resources_current, expected_resources)
-update_newressources_to_json(expected_resources, "updated_resources.json")
+
+# MAJ des ressources
+updated_resources = show_and_fix_resources(resources_current, expected_resources)
+
+# MAJ des ressources dans un nouveau fichier JSON
+update_newressources_to_json(updated_resources, "updated_resources.json")

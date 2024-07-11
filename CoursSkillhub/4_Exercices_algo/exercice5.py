@@ -50,4 +50,4 @@ def update_robot_status(json_to_update, robot_id, new_status):
 #####################
 
 json_to_update = set_file_path("robots.json")
-update_robot_status(json_to_update, 3, 'inactive')
+update_robot_status(json_to_update, 3, 'active')
