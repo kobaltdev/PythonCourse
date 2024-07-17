@@ -13,18 +13,20 @@ def sum_primes(max):
             sum += j
     return sum
 
-def print_primes_in_interval(min, max):
+def find_primes_in_interval(min, max):
     primes_list_in_interval = []
     for i in range(min, max):
         if is_prime(i):
             primes_list_in_interval.append(i)
     return primes_list_in_interval
             
-        
+# Rédigez un script qui calcule puis affiche le premier nombre premier plus grand que 100_000_000.
+
+
          
 # print(is_prime(20021641))
 
 # print(sum_primes(100))
 
-primes = print_primes_in_interval(10000, 10050)
+primes = find_primes_in_interval(100000000, 100000050)
 print(', '.join(str(v) for v in primes))
