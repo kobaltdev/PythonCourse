@@ -1,10 +1,18 @@
 import sqlite3
 import os
 
-# Get the current working directory
-ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-fichier_db = "/home/jc/PythonCourse/coursUdemy/scripting/sql1/album.db"
+# Build WD
+
+def set_file_path(filename):
+    # Path du dossier de travail
+    directory = os.path.dirname(__file__)
+    # contruction du chemin de fichier complet
+    file_to_compute = os.path.join(directory, filename)
+    return file_to_compute
+
+
+fichier_db = set_file_path("album.db")
 
 
 # Creation de la requete
